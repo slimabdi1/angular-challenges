@@ -1,10 +1,18 @@
 /* eslint-disable @angular-eslint/directive-selector */
+import {
+  BUTTON_STATE_PROVIDER,
+  ButtonState,
+} from '@angular-challenges/decoupling/core';
 import { Directive, signal, WritableSignal } from '@angular/core';
-
-export type ButtonState = 'enabled' | 'disabled';
 
 @Directive({
   selector: 'button[btnDisabled]',
+  providers: [
+    {
+      provide: BUTTON_STATE_PROVIDER,
+      useExisting: BtnDisabledDirective,
+    },
+  ],
   host: {
     '(click)': 'toggleState()',
   },
