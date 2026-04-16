@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -21,5 +22,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent {
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA, {
+    optional: true,
+  });
   readonly dialogRef = inject(MatDialogRef<DialogComponent>);
+}
+
+export interface DialogData {
+  title: string;
+  content: string;
+  cancelLabel?: string;
+  confirmLabel?: string;
 }
